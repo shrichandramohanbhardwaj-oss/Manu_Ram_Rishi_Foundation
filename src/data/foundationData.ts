@@ -225,7 +225,7 @@ export const LEADERSHIP: LeadershipMember[] = [
     descriptionHi: 'संस्था के सर्वोच्च आध्यात्मिक मार्गदर्शक और प्रेरणापुंज।',
     badgeEn: 'Supreme Spiritual Guide',
     badgeHi: 'सर्वोच्च आध्यात्मिक मार्गदर्शक',
-    image: '/media/member-ambassador.jpg',
+    image: '/ambassador.jpg',
     specialIcon: 'divine'
   },
   {
@@ -373,6 +373,17 @@ export const GALLERY_ITEMS: GalleryMediaItem[] = [
     locationHi: 'राष्ट्रीय सेवा विंग',
     descriptionEn: 'Official poster of Madhav Ji, National Power House of Manu Ram Rishi Foundation.',
     descriptionHi: 'मनु राम ऋषि फाउंडेशन के नेशनल पावर हाउस माधव जी का आधिकारिक पोस्टर।'
+  },
+  {
+    id: 'member-poster-jayantadas',
+    titleEn: 'Jayanta Das - Field Executive',
+    titleHi: 'जयंत दास - फ़ील्ड एग्जीक्यूटिव',
+    category: 'foundation-members',
+    imageUrl: '/media/member-jayantadas.jpg',
+    locationEn: 'Field Operations Wing',
+    locationHi: 'फ़ील्ड ऑपरेशन्स विंग',
+    descriptionEn: 'Official poster of Jayanta Das, Field Executive of Manu Ram Rishi Foundation.',
+    descriptionHi: 'मनु राम ऋषि फाउंडेशन के फ़ील्ड एग्जीक्यूटिव जयंत दास का आधिकारिक पोस्टर।'
   },
   {
     id: 'gal-media-1',
