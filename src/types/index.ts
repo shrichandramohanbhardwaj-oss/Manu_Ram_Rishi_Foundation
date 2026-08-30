@@ -34,14 +34,14 @@ export interface LeadershipMember {
   badgeHi: string;
   avatarPlaceholder?: string;
   image?: string;
-  specialIcon: 'divine' | 'leader' | 'director' | 'director2';
+  specialIcon: 'divine' | 'leader' | 'director' | 'director2' | 'doctor' | 'madhavji';
 }
 
 export interface GalleryMediaItem {
   id: string;
   titleEn: string;
   titleHi: string;
-  category: 'gau-seva' | 'kund-yamuna' | 'gurukulam' | 'sant-seva' | 'vrindavan';
+  category: 'gau-seva' | 'kund-yamuna' | 'gurukulam' | 'sant-seva' | 'vrindavan' | 'foundation-members';
   imageUrl: string;
   locationEn: string;
   locationHi: string;

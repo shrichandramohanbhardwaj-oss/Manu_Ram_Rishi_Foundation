@@ -225,7 +225,7 @@ export const LEADERSHIP: LeadershipMember[] = [
     descriptionHi: 'संस्था के सर्वोच्च आध्यात्मिक मार्गदर्शक और प्रेरणापुंज।',
     badgeEn: 'Supreme Spiritual Guide',
     badgeHi: 'सर्वोच्च आध्यात्मिक मार्गदर्शक',
-    image: '/ambassador.jpg',
+    image: '/media/member-ambassador.jpg',
     specialIcon: 'divine'
   },
   {
@@ -239,7 +239,7 @@ export const LEADERSHIP: LeadershipMember[] = [
     descriptionHi: 'संस्था के समग्र प्रबंधन, रणनीतिक विकास और प्रकल्पों का संचालन।',
     badgeEn: 'Visionary Leader & CEO',
     badgeHi: 'दूरदर्शी नेतृत्व एवं मुख्य कार्यकारी',
-    image: '/ceo.jpg',
+    image: '/media/member-ceo.jpg',
     specialIcon: 'leader'
   },
   {
@@ -267,6 +267,34 @@ export const LEADERSHIP: LeadershipMember[] = [
     badgeEn: 'Community & Social Welfare',
     badgeHi: 'सामुदायिक सहभागिता एवं कल्याण',
     specialIcon: 'director2'
+  },
+  {
+    id: 'head-doctor',
+    rank: 5,
+    roleEn: 'Head Doctor & Field Officer',
+    roleHi: 'हेड डॉक्टर एवं फ़ील्ड अफ़सर',
+    name: 'Head Doctor (Field Officer)',
+    address: 'Maharashtra, Mumbai',
+    descriptionEn: 'Medical Seva Direction & Health Field Operations in Mumbai Chapter.',
+    descriptionHi: 'चिकित्सा सेवा एवं स्वास्थ्य स्वास्थ्य शिविरों का संचालन (महाराष्ट्र मुंबई)।',
+    badgeEn: 'Head Doctor & Field Officer',
+    badgeHi: 'मुख्य चिकित्सा अधिकारी एवं फ़ील्ड अफ़सर',
+    image: '/media/member-doctor.jpg',
+    specialIcon: 'doctor'
+  },
+  {
+    id: 'national-powerhouse',
+    rank: 6,
+    roleEn: 'National Power House',
+    roleHi: 'नेशनल पावर हाउस',
+    name: 'Madhav Ji',
+    address: 'National Outreach Wing',
+    descriptionEn: 'National Youth Empowerment, Spiritual Seva Drive & Operations.',
+    descriptionHi: 'राष्ट्रीय स्तर पर युवा सशक्तिकरण और सेवा अभियानों का संचालन।',
+    badgeEn: 'National Power House',
+    badgeHi: 'नेशनल पावर हाउस',
+    image: '/media/member-madhavji.jpg',
+    specialIcon: 'madhavji'
   }
 ];
 
@@ -302,6 +330,50 @@ export const OFFICES = {
 };
 
 export const GALLERY_ITEMS: GalleryMediaItem[] = [
+  {
+    id: 'member-poster-ceo',
+    titleEn: 'Shri Chandra Mohan Bhardwaj - Chief Executive Officer (CEO)',
+    titleHi: 'श्री चंद्र मोहन भारद्वाज - मुख्य कार्यकारी अधिकारी (CEO)',
+    category: 'foundation-members',
+    imageUrl: '/media/member-ceo.jpg',
+    locationEn: 'Manu Ram Rishi Foundation HQ',
+    locationHi: 'मनु राम ऋषि फाउंडेशन प्रधान कार्यालय',
+    descriptionEn: 'Official leadership poster of Shri Chandra Mohan Bhardwaj, Chief Executive Officer (CEO) of Manu Ram Rishi Foundation.',
+    descriptionHi: 'मनु राम ऋषि फाउंडेशन के मुख्य कार्यकारी अधिकारी (CEO) श्री चंद्र मोहन भारद्वाज का आधिकारिक पोस्टर।'
+  },
+  {
+    id: 'member-poster-ambassador',
+    titleEn: 'Yugal Jodi Sarkar Vrindavan - Ambassador & Advisor',
+    titleHi: 'युगल जोड़ी सरकार वृन्दावन - राजदूत एवं मार्गदर्शक',
+    category: 'foundation-members',
+    imageUrl: '/media/member-ambassador.jpg',
+    locationEn: 'Sri Dham Vrindavan',
+    locationHi: 'श्री धाम वृन्दावन',
+    descriptionEn: 'Official poster of Yugal Jodi Sarkar Vrindavan, Ambassador and Supreme Advisor of Manu Ram Rishi Foundation.',
+    descriptionHi: 'मनु राम ऋषि फाउंडेशन के परम पावन राजदूत एवं मार्गदर्शक युगल जोड़ी सरकार का आधिकारिक पोस्टर।'
+  },
+  {
+    id: 'member-poster-doctor',
+    titleEn: 'Head Doctor & Field Officer - Maharashtra Mumbai',
+    titleHi: 'हेड डॉक्टर एवं फ़ील्ड अफ़सर - महाराष्ट्र मुंबई',
+    category: 'foundation-members',
+    imageUrl: '/media/member-doctor.jpg',
+    locationEn: 'Maharashtra Mumbai Chapter',
+    locationHi: 'महाराष्ट्र मुंबई क्षेत्र',
+    descriptionEn: 'Official poster of Head Doctor and Field Officer, Maharashtra Mumbai chapter of Manu Ram Rishi Foundation.',
+    descriptionHi: 'मनु राम ऋषि फाउंडेशन के महाराष्ट्र मुंबई क्षेत्र के मुख्य चिकित्सा अधिकारी (Head Doctor) एवं फ़ील्ड अफ़सर का आधिकारिक पोस्टर।'
+  },
+  {
+    id: 'member-poster-madhavji',
+    titleEn: 'Madhav Ji - National Power House',
+    titleHi: 'माधव जी - नेशनल पावर हाउस',
+    category: 'foundation-members',
+    imageUrl: '/media/member-madhavji.jpg',
+    locationEn: 'National Seva Wing',
+    locationHi: 'राष्ट्रीय सेवा विंग',
+    descriptionEn: 'Official poster of Madhav Ji, National Power House of Manu Ram Rishi Foundation.',
+    descriptionHi: 'मनु राम ऋषि फाउंडेशन के नेशनल पावर हाउस माधव जी का आधिकारिक पोस्टर।'
+  },
   {
     id: 'gal-media-1',
     titleEn: 'Sacred Gau Mata Protection & Seva',

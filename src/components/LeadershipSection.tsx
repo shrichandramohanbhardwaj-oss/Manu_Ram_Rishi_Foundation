@@ -224,6 +224,100 @@ export const LeadershipSection: React.FC = () => {
           ))}
         </div>
 
+        {/* Foundation Key Members Showcase Section */}
+        <div className="mt-16 max-w-6xl mx-auto">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold uppercase tracking-wider mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <span>{t("Official Member Posters", "आधिकारिक सदस्य पोस्टर्स")}</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#2D241E] font-cinzel mb-2">
+              {t("Foundation Key Members & Officers", "फाउंडेशन सदस्य एवं प्रमुख पदाधिकारी")}
+            </h3>
+            <p className="text-sm text-amber-800 font-medium max-w-2xl mx-auto">
+              {t(
+                "Official Member Posters & Executive Leadership of Manu Ram Rishi Foundation",
+                "मनु राम ऋषि फाउंडेशन के आधिकारिक सदस्य एवं प्रमुख सेवा पदाधिकारी"
+              )}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                id: 'ceo-poster',
+                name: 'Shri Chandra Mohan Bhardwaj',
+                roleEn: 'Chief Executive Officer (CEO)',
+                roleHi: 'मुख्य कार्यकारी अधिकारी (CEO)',
+                locationEn: 'Vrindavan HQ',
+                locationHi: 'वृन्दावन प्रधान कार्यालय',
+                img: '/media/member-ceo.jpg',
+                badge: 'CEO'
+              },
+              {
+                id: 'ambassador-poster',
+                name: 'Yugal Jodi Sarkar Vrindavan',
+                roleEn: 'Ambassador & Advisor',
+                roleHi: 'मार्गदर्शक एवं राजदूत',
+                locationEn: 'Sri Dham Vrindavan',
+                locationHi: 'श्री धाम वृन्दावन',
+                img: '/media/member-ambassador.jpg',
+                badge: 'AMBASSADOR'
+              },
+              {
+                id: 'doctor-poster',
+                name: 'Head Doctor & Field Officer',
+                roleEn: 'Head Doctor & Field Officer',
+                roleHi: 'हेड डॉक्टर एवं फ़ील्ड अफ़सर',
+                locationEn: 'Maharashtra, Mumbai',
+                locationHi: 'महाराष्ट्र, मुंबई',
+                img: '/media/member-doctor.jpg',
+                badge: 'HEAD DOCTOR'
+              },
+              {
+                id: 'madhavji-poster',
+                name: 'Madhav Ji',
+                roleEn: 'National Power House',
+                roleHi: 'नेशनल पावर हाउस',
+                locationEn: 'National Outreach Wing',
+                locationHi: 'राष्ट्रीय सेवा विंग',
+                img: '/media/member-madhavji.jpg',
+                badge: 'POWER HOUSE'
+              }
+            ].map(m => (
+              <div
+                key={m.id}
+                className="group relative rounded-2xl overflow-hidden bg-white border-2 border-amber-300 shadow-md hover:border-amber-400 hover:shadow-xl transition-all duration-300 flex flex-col"
+              >
+                <div className="relative aspect-[9/16] overflow-hidden bg-slate-950">
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-amber-500/90 backdrop-blur-md text-white text-[10px] font-bold tracking-wider uppercase shadow">
+                    {m.badge}
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+                  
+                  <div className="absolute bottom-0 inset-x-0 p-4 text-white">
+                    <span className="text-[11px] font-bold tracking-wider text-amber-300 uppercase block mb-1 font-hindi">
+                      {t(m.roleEn, m.roleHi)}
+                    </span>
+                    <h4 className="font-cinzel text-base font-extrabold leading-snug drop-shadow-md">
+                      {m.name}
+                    </h4>
+                    <p className="text-xs text-amber-100/90 mt-1 flex items-center gap-1 font-hindi">
+                      <MapPin className="w-3 h-3 text-amber-400 shrink-0" />
+                      <span>{t(m.locationEn, m.locationHi)}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );

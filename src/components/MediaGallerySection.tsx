@@ -81,6 +81,7 @@ export const MediaGallerySection: React.FC = () => {
             <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
               {[
                 { id: 'all', en: 'All Media', hi: 'सभी दृश्य' },
+                { id: 'foundation-members', en: 'Foundation Members', hi: 'फाउंडेशन सदस्य व पदाधिकारी' },
                 { id: 'gau-seva', en: 'Gau Seva', hi: 'गौ सेवा' },
                 { id: 'kund-yamuna', en: 'Yamuna & Kunds', hi: 'यमुना व कुंड' },
                 { id: 'gurukulam', en: 'Vedic Gurukulam', hi: 'गुरुकुलम' },
