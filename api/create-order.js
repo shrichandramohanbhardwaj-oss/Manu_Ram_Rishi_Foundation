@@ -21,40 +21,45 @@ export default async function handler(req, res) {
   try {
     const { amount, currency = 'INR', receipt } = req.body || {};
 
-    if (!amount || isNaN(amount)) {
+    if (!amount || isNaN(Number(amount))) {
       return res.status(400).json({ error: 'Valid amount is required' });
     }
 
-    const amountInPaise = parseInt(amount, 10);
+    const numAmount = Number(amount);
+    // If amount is passed in rupees (e.g. 2100), convert to paise (210000). If already in paise (>= 10000), keep as is.
+    const amountInPaise = numAmount < 10000 ? Math.round(numAmount * 100) : Math.round(numAmount);
+
     if (amountInPaise < 100) {
-      return res.status(400).json({ error: 'Minimum amount must be at least 100 paise (₹1)' });
+      return res.status(400).json({ error: 'Minimum contribution is ₹1 (100 paise)' });
     }
 
-    const razorpay = new Razorpay({
+    const instance = new Razorpay({
       key_id: process.env.RAZORPAY_KEY_ID || process.env.VITE_RAZORPAY_KEY_ID || '',
       key_secret: process.env.RAZORPAY_KEY_SECRET || '',
     });
 
-    const order = await razorpay.orders.create({
+    const options = {
       amount: amountInPaise,
       currency: currency || 'INR',
-      receipt: receipt || `MRRF_rcpt_${Date.now()}`,
-    });
+      receipt: receipt || `receipt_${Date.now()}`,
+    };
+
+    const order = await instance.orders.create(options);
 
     return res.status(200).json({
+      ...order,
       id: order.id,
       order_id: order.id,
       amount: order.amount,
       currency: order.currency,
-      receipt: order.receipt,
     });
   } catch (error) {
-    console.error('Razorpay Create Order Error:', error);
+    console.error('Razorpay order creation error:', error);
     if (error?.statusCode === 401) {
       return res.status(401).json({ error: 'Razorpay Authentication failed. Check KEY_ID and KEY_SECRET.' });
     }
     return res.status(500).json({
-      error: 'Failed to create Razorpay order',
+      error: error.message || 'Error creating order',
       details: error?.error?.description || error.message,
     });
   }

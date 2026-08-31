@@ -29,13 +29,13 @@ app.post('/api/create-order', async (req, res) => {
   try {
     const { amount, currency = 'INR', receipt } = req.body || {};
 
-    if (!amount || isNaN(amount)) {
+    if (!amount || isNaN(Number(amount))) {
       return res.status(400).json({ error: 'Valid amount is required' });
     }
 
-    const amountInPaise = parseInt(amount, 10);
+    const numAmount = Number(amount);
+    const amountInPaise = numAmount < 10000 ? Math.round(numAmount * 100) : Math.round(numAmount);
 
-    // Minimum amount: 100 paise (₹1)
     if (amountInPaise < 100) {
       return res.status(400).json({ error: 'Minimum amount must be at least 100 paise (₹1)' });
     }
@@ -43,12 +43,13 @@ app.post('/api/create-order', async (req, res) => {
     const options = {
       amount: amountInPaise,
       currency: currency || 'INR',
-      receipt: receipt || `MRRF_rcpt_${Date.now()}`,
+      receipt: receipt || `receipt_${Date.now()}`,
     };
 
     const order = await razorpay.orders.create(options);
 
     return res.status(200).json({
+      ...order,
       id: order.id,
       order_id: order.id,
       amount: order.amount,
