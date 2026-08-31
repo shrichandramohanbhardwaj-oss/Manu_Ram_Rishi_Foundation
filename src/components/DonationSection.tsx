@@ -122,7 +122,7 @@ export const DonationSection: React.FC<DonationSectionProps> = ({ selectedInitia
       const orderData = await orderResponse.json();
 
       // STEP 2: FRONTEND - Razorpay Checkout Modal
-      const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_TWIVok7dOWi2Fw';
+      const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_TWJ9HQ6FY625vn';
 
       const options: any = {
         key: razorpayKey,
