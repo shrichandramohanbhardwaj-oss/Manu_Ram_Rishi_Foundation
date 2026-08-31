@@ -26,9 +26,8 @@ export const DonationSection: React.FC<DonationSectionProps> = ({ selectedInitia
   const [donorPan, setDonorPan] = useState<string>('');
   const [copiedUpi, setCopiedUpi] = useState<boolean>(false);
 
-  // Receipt Modal State
-  const [receipt, setReceipt] = useState<DonationReceipt | null>(null);
-  const [showReceiptModal, setShowReceiptModal] = useState<boolean>(false);
+  // Processing state
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
   // Update selected project if props change
   useEffect(() => {
@@ -67,52 +66,161 @@ export const DonationSection: React.FC<DonationSectionProps> = ({ selectedInitia
     setTimeout(() => setCopiedUpi(false), 2500);
   };
 
-  const handleSubmitDonation = (e: React.FormEvent) => {
+  const handleSubmitDonation = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!donorName.trim()) {
       alert(t("Please enter your name", "कृपया अपना नाम दर्ज करें"));
       return;
     }
-    if (!amount || amount < 100) {
-      alert(t("Minimum contribution amount is ₹100", "न्यूनतम सहयोग राशि ₹100 है"));
+    if (!amount || amount < 1) {
+      alert(t("Minimum contribution amount is ₹1", "न्यूनतम सहयोग राशि ₹1 है"));
       return;
     }
 
-    // Trigger celebratory auspicious confetti
-    confetti({
-      particleCount: 120,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#00e5ff', '#f59e0b', '#10b981', '#fbbf24', '#ffffff']
-    });
+    setIsProcessing(true);
 
-    const activeProj = projects.find(p => p.id === selectedProject) || projects[0];
+    try {
+      const activeProj = projects.find(p => p.id === selectedProject) || projects[0];
+      const amountInPaise = amount * 100;
+      const receiptId = `MRRF_${Date.now()}`;
 
-    const newReceipt: DonationReceipt = {
-      receiptNumber: `MRRF-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`,
-      donorName: donorName.trim(),
-      donorEmail: donorEmail.trim() || 'devotee@sanatanseva.org',
-      donorPhone: donorPhone.trim() || '+91 98XXXXXXXX',
-      donorPan: donorPan.trim() ? donorPan.toUpperCase().trim() : undefined,
-      sevaProjectEn: activeProj.en,
-      sevaProjectHi: activeProj.hi,
-      amount: amount,
-      frequency: frequency,
-      paymentMode: paymentMode,
-      transactionId: `TXN${Date.now().toString().slice(-8)}`,
-      date: new Date().toLocaleDateString(lang === 'hi' ? 'hi-IN' : 'en-IN', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      }),
-      is80GEligible: true
-    };
+      // STEP 1: BACKEND - Create Order
+      const orderResponse = await fetch('/api/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: amountInPaise,
+          currency: 'INR',
+          receipt: receiptId,
+        }),
+      });
 
-    setReceipt(newReceipt);
-    setShowReceiptModal(true);
+      if (!orderResponse.ok) {
+        const errorData = await orderResponse.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.details || `Server returned ${orderResponse.status}`);
+      }
+
+      const orderData = await orderResponse.json();
+
+      // STEP 2: FRONTEND - Razorpay Checkout Modal
+      const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_TWIVok7dOWi2Fw';
+
+      const options: any = {
+        key: razorpayKey,
+        amount: orderData.amount,
+        currency: orderData.currency || 'INR',
+        name: 'Manu Ram Rishi Foundation',
+        description: `Seva Contribution for ${t(activeProj.en, activeProj.hi)}`,
+        image: '/logo-clean.png',
+        order_id: orderData.order_id,
+        prefill: {
+          name: donorName.trim(),
+          email: donorEmail.trim() || 'devotee@sanatanseva.org',
+          contact: donorPhone.trim() || '',
+        },
+        notes: {
+          project: selectedProject,
+          frequency: frequency,
+          pan: donorPan.trim() ? donorPan.toUpperCase().trim() : '',
+        },
+        theme: {
+          color: '#d97706',
+        },
+        handler: async function (response: any) {
+          try {
+            // STEP 3: BACKEND - Verify Signature
+            const verifyRes = await fetch('/api/verify-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+              }),
+            });
+
+            const verifyData = await verifyRes.json();
+
+            if (verifyRes.ok && verifyData.success) {
+              // Trigger celebratory confetti
+              confetti({
+                particleCount: 120,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#00e5ff', '#f59e0b', '#10b981', '#fbbf24', '#ffffff']
+              });
+
+              // Generate Receipt
+              const newReceipt: DonationReceipt = {
+                receiptNumber: `MRRF-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`,
+                donorName: donorName.trim(),
+                donorEmail: donorEmail.trim() || 'devotee@sanatanseva.org',
+                donorPhone: donorPhone.trim() || '+91 98XXXXXXXX',
+                donorPan: donorPan.trim() ? donorPan.toUpperCase().trim() : undefined,
+                sevaProjectEn: activeProj.en,
+                sevaProjectHi: activeProj.hi,
+                amount: amount,
+                frequency: frequency,
+                paymentMode: 'Card',
+                transactionId: response.razorpay_payment_id || `TXN${Date.now().toString().slice(-8)}`,
+                date: new Date().toLocaleDateString(lang === 'hi' ? 'hi-IN' : 'en-IN', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                }),
+                is80GEligible: true
+              };
+
+              setReceipt(newReceipt);
+              setShowReceiptModal(true);
+            } else {
+              alert(t(
+                `Payment verification failed: ${verifyData.error || 'Invalid Signature'}`,
+                `भुगतान सत्यापन विफल: ${verifyData.error || 'अमान्य हस्ताक्षर'}`
+              ));
+            }
+          } catch (err: any) {
+            console.error('Verification Error:', err);
+            alert(t("Server error verifying payment.", "भुगतान सत्यापन के दौरान त्रुटि हुई।"));
+          } finally {
+            setIsProcessing(false);
+          }
+        },
+        modal: {
+          ondismiss: function () {
+            setIsProcessing(false);
+            console.log('Razorpay payment modal closed by user');
+          }
+        }
+      };
+
+      if (typeof (window as any).Razorpay === 'undefined') {
+        throw new Error('Razorpay SDK script failed to load. Please check network connection.');
+      }
+
+      const rzp = new (window as any).Razorpay(options);
+
+      rzp.on('payment.failed', function (resp: any) {
+        console.error('Razorpay Payment Failed:', resp.error);
+        alert(t(
+          `Payment Failed: ${resp.error?.description || resp.error?.reason || 'Transaction could not be completed'}`,
+          `भुगतान असफल: ${resp.error?.description || 'लेनदेन पूरा नहीं हो सका'}`
+        ));
+        setIsProcessing(false);
+      });
+
+      rzp.open();
+    } catch (error: any) {
+      console.error('Razorpay Checkout Init Error:', error);
+      alert(t(
+        `Failed to start payment: ${error.message || 'Server connection error'}`,
+        `भुगतान प्रारंभ करने में असमर्थ: ${error.message || 'सर्वर संपर्क त्रुटि'}`
+      ));
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -427,16 +535,33 @@ export const DonationSection: React.FC<DonationSectionProps> = ({ selectedInitia
             {/* Final Glowing Submit CTA */}
             <button
               type="submit"
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:to-orange-600 text-white text-base sm:text-lg font-bold shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 cursor-pointer"
+              disabled={isProcessing}
+              className={`w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:to-orange-600 text-white text-base sm:text-lg font-bold shadow-md transition-all flex items-center justify-center gap-3 cursor-pointer ${
+                isProcessing ? 'opacity-70 cursor-not-allowed scale-100' : 'hover:scale-[1.01] active:scale-[0.99]'
+              }`}
             >
-              <Heart className="w-5 h-5 fill-white text-white" />
-              <span>
-                {t(
-                  `Complete Seva Contribution of ₹ ${amount.toLocaleString('en-IN')}`,
-                  `₹ ${amount.toLocaleString('en-IN')} का पावन सहयोग पूर्ण करें`
-                )}
-              </span>
-              <Sparkles className="w-5 h-5" />
+              {isProcessing ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span>
+                    {t(
+                      "Initializing Razorpay Secure Checkout...",
+                      "सुरक्षित रेज़रपे भुगतान गेटवे प्रारंभ हो रहा है..."
+                    )}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <Heart className="w-5 h-5 fill-white text-white" />
+                  <span>
+                    {t(
+                      `Pay via Razorpay • ₹ ${amount.toLocaleString('en-IN')}`,
+                      `रेज़रपे द्वारा सहयोग करें • ₹ ${amount.toLocaleString('en-IN')}`
+                    )}
+                  </span>
+                  <Sparkles className="w-5 h-5" />
+                </>
+              )}
             </button>
 
           </form>
