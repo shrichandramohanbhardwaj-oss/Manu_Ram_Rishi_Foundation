@@ -29,6 +29,10 @@ export const DonationSection: React.FC<DonationSectionProps> = ({ selectedInitia
   // Processing state
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
+  // Receipt Modal State
+  const [receipt, setReceipt] = useState<DonationReceipt | null>(null);
+  const [showReceiptModal, setShowReceiptModal] = useState<boolean>(false);
+
   // Dynamically load Razorpay SDK script safely with window & document checks
   useEffect(() => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return;
