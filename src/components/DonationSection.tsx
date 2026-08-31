@@ -29,6 +29,19 @@ export const DonationSection: React.FC<DonationSectionProps> = ({ selectedInitia
   // Processing state
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
+  // Dynamically load Razorpay SDK script safely with window & document checks
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
+    if (!document.getElementById('razorpay-checkout-sdk')) {
+      const script = document.createElement('script');
+      script.id = 'razorpay-checkout-sdk';
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+
   // Update selected project if props change
   useEffect(() => {
     if (selectedInitiativeId) {
@@ -68,6 +81,7 @@ export const DonationSection: React.FC<DonationSectionProps> = ({ selectedInitia
 
   const handleSubmitDonation = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (typeof window === 'undefined') return;
 
     if (!donorName.trim()) {
       alert(t("Please enter your name", "कृपया अपना नाम दर्ज करें"));
