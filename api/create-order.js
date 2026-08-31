@@ -42,6 +42,7 @@ export default async function handler(req, res) {
     });
 
     return res.status(200).json({
+      id: order.id,
       order_id: order.id,
       amount: order.amount,
       currency: order.currency,

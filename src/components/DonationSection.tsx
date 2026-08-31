@@ -121,6 +121,11 @@ export const DonationSection: React.FC<DonationSectionProps> = ({ selectedInitia
 
       const orderData = await orderResponse.json();
 
+      const orderId = orderData.id || orderData.order_id;
+      if (!orderId) {
+        throw new Error('Order creation succeeded but order_id was not returned by server.');
+      }
+
       // STEP 2: FRONTEND - Razorpay Checkout Modal
       const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_TWJ9HQ6FY625vn';
 
@@ -131,7 +136,7 @@ export const DonationSection: React.FC<DonationSectionProps> = ({ selectedInitia
         name: 'Manu Ram Rishi Foundation',
         description: `Seva Contribution for ${t(activeProj.en, activeProj.hi)}`,
         image: '/logo-clean.png',
-        order_id: orderData.order_id,
+        order_id: orderId,
         prefill: {
           name: donorName.trim(),
           email: donorEmail.trim() || 'devotee@sanatanseva.org',
