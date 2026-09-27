@@ -78,7 +78,7 @@ export const OfficesContactSection: React.FC = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-amber-700 shrink-0" />
-                <span className="font-mono">{OFFICES.officeVrindavan.phone}</span>
+                <a href={`tel:${OFFICES.officeVrindavan.phone.replace(/\s+/g, '')}`} className="font-mono hover:underline text-amber-900 font-semibold">{OFFICES.officeVrindavan.phone}</a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-amber-700 shrink-0" />
@@ -136,7 +136,7 @@ export const OfficesContactSection: React.FC = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-amber-700 shrink-0" />
-                <span className="font-mono">{OFFICES.officeAssam.phone}</span>
+                <a href={`tel:${OFFICES.officeAssam.phone.replace(/\s+/g, '')}`} className="font-mono hover:underline text-amber-900 font-semibold">{OFFICES.officeAssam.phone}</a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-amber-700 shrink-0" />

@@ -253,9 +253,9 @@ export const Footer: React.FC<FooterProps> = ({
               <p className="text-amber-100/90">
                 {OFFICES.officeVrindavan.addressEn}
               </p>
-              <p className="text-amber-300 font-mono text-[11px]">
+              <a href={`tel:${OFFICES.officeVrindavan.phone.replace(/\s+/g, '')}`} className="text-amber-300 font-mono text-[11px] block hover:underline">
                 {OFFICES.officeVrindavan.phone}
-              </p>
+              </a>
             </div>
 
             {/* Assam Office */}
@@ -267,9 +267,9 @@ export const Footer: React.FC<FooterProps> = ({
               <p className="text-amber-100/90">
                 {OFFICES.officeAssam.addressEn}
               </p>
-              <p className="text-amber-300 font-mono text-[11px]">
+              <a href={`tel:${OFFICES.officeAssam.phone.replace(/\s+/g, '')}`} className="text-amber-300 font-mono text-[11px] block hover:underline">
                 {OFFICES.officeAssam.phone}
-              </p>
+              </a>
             </div>
 
             {/* Instant Donate Button in Footer — Divine Saffron */}
