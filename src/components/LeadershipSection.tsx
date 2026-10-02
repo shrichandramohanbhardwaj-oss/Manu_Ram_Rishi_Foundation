@@ -319,18 +319,26 @@ export const LeadershipSection: React.FC = () => {
                 key={m.id}
                 className="group relative rounded-2xl overflow-hidden bg-white border-2 border-amber-300 shadow-md hover:border-amber-400 hover:shadow-xl transition-all duration-300 flex flex-col"
               >
-                <div className="relative aspect-[9/16] overflow-hidden bg-slate-950">
+                <div className="relative aspect-[4/5] overflow-hidden bg-slate-950 flex items-center justify-center">
+                  {/* Ambient background blur to smoothly fill any margins */}
+                  <img
+                    src={m.img}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover blur-md opacity-35 scale-110 pointer-events-none"
+                  />
+                  {/* Full uncropped image */}
                   <img
                     src={m.img}
                     alt={m.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="relative z-10 w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-amber-500/90 backdrop-blur-md text-white text-[10px] font-bold tracking-wider uppercase shadow">
+                  <div className="absolute top-3 right-3 z-20 px-2.5 py-1 rounded-full bg-amber-500/90 backdrop-blur-md text-white text-[10px] font-bold tracking-wider uppercase shadow">
                     {m.badge}
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity pointer-events-none" />
                   
-                  <div className="absolute bottom-0 inset-x-0 p-4 text-white">
+                  <div className="absolute bottom-0 inset-x-0 z-20 p-4 text-white">
                     <span className="text-[11px] font-bold tracking-wider text-amber-300 uppercase block mb-1 font-hindi">
                       {t(m.roleEn, m.roleHi)}
                     </span>
