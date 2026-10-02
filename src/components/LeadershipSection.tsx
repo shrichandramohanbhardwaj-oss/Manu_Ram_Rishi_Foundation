@@ -242,7 +242,7 @@ export const LeadershipSection: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[
               {
                 id: 'ceo-poster',
@@ -293,6 +293,26 @@ export const LeadershipSection: React.FC = () => {
                 locationHi: 'फ़ील्ड ऑपरेशन्स विंग',
                 img: '/media/member-jayantadas.jpg',
                 badge: 'EXECUTIVE'
+              },
+              {
+                id: 'amitraj-poster',
+                name: 'Amit Raj Singh',
+                roleEn: 'Field Officer (Odisha Youth)',
+                roleHi: 'फ़ील्ड ऑफिसर (ओडिशा यूथ)',
+                locationEn: 'Odisha Youth Wing',
+                locationHi: 'ओडिशा युवा विंग',
+                img: '/media/member-amit-raj-singh.jpg',
+                badge: 'FIELD OFFICER'
+              },
+              {
+                id: 'surendrasawan-poster',
+                name: 'Surendra Sawan',
+                roleEn: 'Field Officer (U.P.)',
+                roleHi: 'फ़ील्ड ऑफिसर (उत्तर प्रदेश)',
+                locationEn: 'Uttar Pradesh Chapter',
+                locationHi: 'उत्तर प्रदेश सेवा क्षेत्र',
+                img: '/media/member-surendra-sawan.jpg',
+                badge: 'FIELD OFFICER'
               }
             ].map(m => (
               <div

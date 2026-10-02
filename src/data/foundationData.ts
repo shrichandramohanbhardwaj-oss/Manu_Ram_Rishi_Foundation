@@ -386,6 +386,28 @@ export const GALLERY_ITEMS: GalleryMediaItem[] = [
     descriptionHi: 'मनु राम ऋषि फाउंडेशन के फ़ील्ड एग्जीक्यूटिव जयंत दास का आधिकारिक पोस्टर।'
   },
   {
+    id: 'member-poster-amitraj',
+    titleEn: 'Amit Raj Singh - Field Officer (Odisha Youth)',
+    titleHi: 'अमित राज सिंह - फ़ील्ड ऑफिसर (ओडिशा यूथ)',
+    category: 'foundation-members',
+    imageUrl: '/media/member-amit-raj-singh.jpg',
+    locationEn: 'Odisha Youth Wing',
+    locationHi: 'ओडिशा युवा विंग',
+    descriptionEn: 'Official poster of Amit Raj Singh, Field Officer (Odisha Youth) of Manu Ram Rishi Foundation.',
+    descriptionHi: 'मनु राम ऋषि फाउंडेशन के फ़ील्ड ऑफिसर (ओडिशा यूथ) अमित राज सिंह का आधिकारिक पोस्टर।'
+  },
+  {
+    id: 'member-poster-surendrasawan',
+    titleEn: 'Surendra Sawan - Field Officer (U.P.)',
+    titleHi: 'सुरेंद्र सावन - फ़ील्ड ऑफिसर (उत्तर प्रदेश)',
+    category: 'foundation-members',
+    imageUrl: '/media/member-surendra-sawan.jpg',
+    locationEn: 'Uttar Pradesh Chapter',
+    locationHi: 'उत्तर प्रदेश सेवा क्षेत्र',
+    descriptionEn: 'Official poster of Surendra Sawan, Field Officer (Uttar Pradesh) of Manu Ram Rishi Foundation.',
+    descriptionHi: 'मनु राम ऋषि फाउंडेशन के फ़ील्ड ऑफिसर (उत्तर प्रदेश) सुरेंद्र सावन का आधिकारिक पोस्टर।'
+  },
+  {
     id: 'gal-media-1',
     titleEn: 'Sacred Gau Mata Protection & Seva',
     titleHi: 'गौ माता नित्य सेवा एवं सुरक्षा संकल्प',
