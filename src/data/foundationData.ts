@@ -408,6 +408,28 @@ export const GALLERY_ITEMS: GalleryMediaItem[] = [
     descriptionHi: 'मनु राम ऋषि फाउंडेशन के फ़ील्ड ऑफिसर (उत्तर प्रदेश) सुरेंद्र सावन का आधिकारिक पोस्टर।'
   },
   {
+    id: 'member-poster-vaibhav-agrawal-1',
+    titleEn: 'Vaibhav Agrawal - NGO Protsahan & Ganesh Bhakt',
+    titleHi: 'वैभव अग्रवाल - NGO प्रोत्साहन एवं गणेश भक्त',
+    category: 'foundation-members',
+    imageUrl: '/media/member-vaibhav-agrawal-1.jpg',
+    locationEn: 'Foundation Outreach Wing',
+    locationHi: 'फाउंडेशन जनसम्पर्क एवं सेवा विंग',
+    descriptionEn: 'Official photo of Ganesh Bhakt Vaibhav Agrawal - NGO Protsahan.',
+    descriptionHi: 'मनु राम ऋषि फाउंडेशन के NGO प्रोत्साहन एवं गणेश भक्त वैभव अग्रवाल का सेवा सम्मान।'
+  },
+  {
+    id: 'member-poster-vaibhav-agrawal-2',
+    titleEn: 'Vaibhav Agrawal - NGO Protsahan & Leadership Felicitation',
+    titleHi: 'वैभव अग्रवाल - NGO प्रोत्साहन एवं विशिष्ट अभिनंदन',
+    category: 'foundation-members',
+    imageUrl: '/media/member-vaibhav-agrawal-2.jpg',
+    locationEn: 'Foundation Outreach Wing',
+    locationHi: 'फाउंडेशन जनसम्पर्क एवं सेवा विंग',
+    descriptionEn: 'Official felicitation ceremony of Ganesh Bhakt Vaibhav Agrawal - NGO Protsahan.',
+    descriptionHi: 'गणेश भक्त वैभव अग्रवाल का NGO प्रोत्साहन एवं विशिष्ट अभिनंदन क्षण।'
+  },
+  {
     id: 'gal-media-1',
     titleEn: 'Sacred Gau Mata Protection & Seva',
     titleHi: 'गौ माता नित्य सेवा एवं सुरक्षा संकल्प',

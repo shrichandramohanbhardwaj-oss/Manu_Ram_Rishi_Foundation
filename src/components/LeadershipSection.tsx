@@ -285,6 +285,26 @@ export const LeadershipSection: React.FC = () => {
                 badge: 'POWER HOUSE'
               },
               {
+                id: 'vaibhav-agrawal-poster-1',
+                name: 'Vaibhav Agrawal',
+                roleEn: 'NGO Protsahan & Ganesh Bhakt',
+                roleHi: 'NGO प्रोत्साहन • गणेश भक्त',
+                locationEn: 'Foundation Outreach',
+                locationHi: 'फाउंडेशन जनसम्पर्क एवं सेवा',
+                img: '/media/member-vaibhav-agrawal-1.jpg',
+                badge: 'PROTSAHAN'
+              },
+              {
+                id: 'vaibhav-agrawal-poster-2',
+                name: 'Vaibhav Agrawal',
+                roleEn: 'NGO Protsahan & Leadership',
+                roleHi: 'NGO प्रोत्साहन • विशिष्ट अभिनंदन',
+                locationEn: 'Foundation Outreach',
+                locationHi: 'फाउंडेशन जनसम्पर्क एवं सेवा',
+                img: '/media/member-vaibhav-agrawal-2.jpg',
+                badge: 'GANESH BHAKT'
+              },
+              {
                 id: 'jayantadas-poster',
                 name: 'Jayanta Das',
                 roleEn: 'Field Executive',
